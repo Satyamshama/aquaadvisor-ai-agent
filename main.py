@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import requests
-
+import os
 app = FastAPI(title="AquaAdvisor AI Agent", description="Water Quality Expert AI Assistant")
 
 app.add_middleware(
@@ -14,7 +14,8 @@ app.add_middleware(
 )
 
 # Groq API setup (FREE with signup at console.groq.com)
-GROQ_API_KEY = "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"  # Replace with your Groq API Key if regenerated
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "demo-key-placeholder")
+  # Replace with your Groq API Key if regenerated
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 class ChatMessage(BaseModel):
